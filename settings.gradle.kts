@@ -16,3 +16,6 @@ dependencyResolutionManagement {
 rootProject.name = "KoreSample"
 include(":app")
 include (":core")
+include(":mobileads")
+include(":mobileads:admob")
+include(":mobileads:max")
