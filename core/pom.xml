@@ -1,5 +1,12 @@
-<dependency>
-    <groupId>com.github.kohuyn:KoreAndroid</groupId>
+<project>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.example</groupId>
     <artifactId>core</artifactId>
     <version>1.0.0</version>
-</dependency>
+    <packaging>jar</packaging>
+    <dependency>
+        <groupId>com.kohuyn</groupId>
+        <artifactId>core</artifactId>
+        <version>1.0.0</version>
+    </dependency>
+</project>

@@ -1,0 +1,22 @@
+<project>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.kohuyn</groupId>
+    <artifactId>core</artifactId>
+    <version>1.0.0</version>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>core</module>
+        <module>mobileads</module>
+        <module>mobileads-admob</module>
+        <module>mobileads-max</module>
+    </modules>
+
+    <repositories>
+        <!-- Add JitPack or other repositories here -->
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+    </repositories>
+</project>
