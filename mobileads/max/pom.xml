@@ -1,0 +1,5 @@
+<dependency>
+    <groupId>com.github.kohuyn:KoreAndroid</groupId>
+    <artifactId>mobileads-max</artifactId>
+    <version>1.0.0</version>
+</dependency>
