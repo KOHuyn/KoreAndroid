@@ -10,13 +10,13 @@ import com.mobile.ads.core.appopen.result.AppOpenResult
 import com.mobile.ads.error.MobileAdError
 import com.mobile.ads.listener.AdResultListener
 import com.mobile.ads.visibility.MobileAdVisibility
-import java.lang.ref.WeakReference
 import java.util.Date
 import java.util.concurrent.atomic.AtomicBoolean
 
-abstract class MobileAppOpenAdsResumeCore : MobileAppOpenAdsResume() {
+abstract class MobileAppOpenAdsResumeCore<REQUEST : AppOpenRequest> :
+    MobileAppOpenAdsResume<REQUEST>() {
     private var appOpenAd: AppOpenResult? = null
-    private var appOpenRequest: WeakReference<AppOpenRequest>? = null
+    private var appOpenRequest: REQUEST? = null
     private var loadTime: Long = 0
     private lateinit var application: Application
     private var canSkipShowAdResume = AtomicBoolean(false)
@@ -38,8 +38,8 @@ abstract class MobileAppOpenAdsResumeCore : MobileAppOpenAdsResume() {
         backgroundDetector.addOnForegroundListener(foregroundListener)
     }
 
-    override fun requestAdIfAvailable(request: AppOpenRequest) {
-        this.appOpenRequest = WeakReference(request)
+    override fun requestAdIfAvailable(request: REQUEST) {
+        this.appOpenRequest = request
         if (!MobileAdVisibility.isVisibleAd()) return
         if (appOpenAd != null && wasLoadTimeLessThanNHoursAgo()) return
         requestAd(request)
@@ -53,7 +53,7 @@ abstract class MobileAppOpenAdsResumeCore : MobileAppOpenAdsResume() {
                 populateAd(activity, appOpenAd)
             }
         } else {
-            appOpenRequest?.get()?.let(::requestAd)
+            appOpenRequest?.let(::requestAd)
         }
     }
 
@@ -71,7 +71,7 @@ abstract class MobileAppOpenAdsResumeCore : MobileAppOpenAdsResume() {
         return dateDifference < numMilliSecondsPerHour * 4L
     }
 
-    private fun requestAd(request: AppOpenRequest) {
+    private fun requestAd(request: REQUEST) {
         requestAd(request, object : AdResultListener<AppOpenResult> {
             override fun onCompleteListener(result: AppOpenResult) {
                 result.listenerManager.addListener(localAppOpenListener)
@@ -88,7 +88,7 @@ abstract class MobileAppOpenAdsResumeCore : MobileAppOpenAdsResume() {
     private val localAppOpenListener = object : MobileAppOpenAdListener() {
         override fun onAdClose() {
             appOpenAd = null
-            appOpenRequest?.get()?.let(::requestAd)
+            appOpenRequest?.let(::requestAd)
         }
 
         override fun onAdFailToShow() {}

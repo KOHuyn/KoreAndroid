@@ -1,6 +1,7 @@
 package com.mobile.ads.core.interstitial.request
 
 import android.app.Activity
+import android.content.Context
 import com.mobile.ads.core.IMobileAdRequest
 
 /**
@@ -8,5 +9,8 @@ import com.mobile.ads.core.IMobileAdRequest
  */
 abstract class MobileInterstitialRequest(
     open val activity: Activity,
-    open val adUnitId: String
-) : IMobileAdRequest
+    override val adUnitId: String
+) : IMobileAdRequest {
+    override val context: Context
+        get() = activity
+}

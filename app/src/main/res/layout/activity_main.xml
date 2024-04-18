@@ -17,20 +17,37 @@
         android:id="@+id/bannerFrame"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <include
+            android:id="@+id/shimmerBannerAd"
+            android:visibility="gone"
+            layout="@layout/shimmer_banner_view" />
+    </FrameLayout>
 
     <FrameLayout
         android:id="@+id/nativeFrame"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" >
+        <include
+            android:id="@+id/shimmerNative"
+            android:visibility="gone"
+            layout="@layout/shimmer_native_small_view" />
+    </FrameLayout>
 
     <FrameLayout
         android:id="@+id/nativeFrameNoMedia"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" >
+
+        <include
+            android:id="@+id/shimmerNativeNoMedia"
+            android:visibility="gone"
+            layout="@layout/shimmer_native_small_view" />
+    </FrameLayout>
 
 </LinearLayout>

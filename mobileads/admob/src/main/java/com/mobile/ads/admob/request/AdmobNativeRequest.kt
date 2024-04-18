@@ -5,5 +5,6 @@ import com.mobile.ads.core.nativead.request.MobileNativeRequest
 
 data class AdmobNativeRequest(
     override val context: Context,
-    override val adUnitId: String
-) : MobileNativeRequest(context, adUnitId)
+    override val adUnitId: String,
+    override val nativeLayoutId: Int
+) : MobileNativeRequest(context, adUnitId, nativeLayoutId)

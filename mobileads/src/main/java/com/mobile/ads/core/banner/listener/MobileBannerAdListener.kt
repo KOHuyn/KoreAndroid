@@ -7,5 +7,5 @@ import com.mobile.ads.listener.MobileAdListener
  * Created by KO Huyn on 05/03/2024.
  */
 abstract class MobileBannerAdListener : MobileAdListener() {
-    abstract fun onAdLoaded(bannerResult: BannerResult)
+    open fun onAdLoaded(bannerResult: BannerResult) {}
 }

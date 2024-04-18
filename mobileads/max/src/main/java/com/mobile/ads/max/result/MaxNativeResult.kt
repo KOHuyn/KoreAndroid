@@ -8,5 +8,6 @@ import com.mobile.ads.max.nativead.listener.MaxNativeAdListenerCollection
 data class MaxNativeResult(
     val maxNativeAdView: MaxNativeAdView?,
     val maxAd: MaxAd,
+    override val layoutNativeId: Int,
     override val listenerManager: MaxNativeAdListenerCollection
-) : NativeResult(listenerManager)
+) : NativeResult(listenerManager, layoutNativeId)

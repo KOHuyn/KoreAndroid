@@ -4,6 +4,6 @@ import android.app.Activity
 import com.mobile.ads.core.IMobileAdRequest
 
 abstract class MobileRewardRequest(
-    open val context: Activity,
-    open val adUnitId: String,
+    override val context: Activity,
+    override val adUnitId: String,
 ) : IMobileAdRequest

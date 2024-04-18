@@ -6,5 +6,6 @@ import com.mobile.ads.core.nativead.result.NativeResult
 
 data class AdmobNativeResult(
     val native: NativeAd,
+    override val layoutNativeId: Int,
     override val listenerManager: AdmobNativeAdListenerCollection
-) : NativeResult(listenerManager)
+) : NativeResult(listenerManager,layoutNativeId)

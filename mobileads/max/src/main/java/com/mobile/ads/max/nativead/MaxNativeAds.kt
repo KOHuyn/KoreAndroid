@@ -3,6 +3,8 @@ package com.mobile.ads.max.nativead
 import android.content.Context
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
+import com.applovin.mediation.MaxAd
+import com.applovin.mediation.nativeAds.MaxNativeAdListener
 import com.applovin.mediation.nativeAds.MaxNativeAdLoader
 import com.applovin.mediation.nativeAds.MaxNativeAdView
 import com.applovin.mediation.nativeAds.MaxNativeAdViewBinder
@@ -30,6 +32,14 @@ object MaxNativeAds : MobileNativeAds<MaxNativeRequest> {
     ) {
         val nativeAdLoader = MaxNativeAdLoader(request.adUnitId, request.context)
         val listenerManager = MaxNativeAdListenerCollection()
+        listenerManager.addMaxListener(object :MaxNativeAdListener(){
+            override fun onNativeAdLoaded(p0: MaxNativeAdView?, p1: MaxAd) {
+                super.onNativeAdLoaded(p0, p1)
+                listenerManager.invokeAdListener {
+                    it.onAdLoaded(MaxNativeResult(p0, p1, request.nativeLayoutId, listenerManager))
+                }
+            }
+        })
         listenerManager.addListener(object : MobileNativeAdListener() {
             override fun onAdLoaded(nativeResult: NativeResult) {
                 super.onAdLoaded(nativeResult)
@@ -58,10 +68,10 @@ object MaxNativeAds : MobileNativeAds<MaxNativeRequest> {
             })
         }
 
-    override fun populateTo(view: ViewGroup, nativeLayoutId: Int, nativeResult: NativeResult) {
-        if (nativeResult is MaxNativeResult) {
-            view.removeAllViews()
-            view.addView(nativeResult.maxNativeAdView)
+    override fun populateAd(viewGroup: ViewGroup, result: NativeResult) {
+        if (result is MaxNativeResult) {
+            viewGroup.removeAllViews()
+            viewGroup.addView(result.maxNativeAdView)
         }
     }
 

@@ -8,5 +8,5 @@ data class MaxNativeRequest(
     override val context: Context,
     override val adUnitId: String,
     @LayoutRes
-    val nativeLayoutId: Int
-) : MobileNativeRequest(context, adUnitId)
+    override val nativeLayoutId: Int
+) : MobileNativeRequest(context, adUnitId, nativeLayoutId)

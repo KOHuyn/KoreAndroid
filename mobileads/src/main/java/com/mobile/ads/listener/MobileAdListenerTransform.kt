@@ -7,8 +7,8 @@ import java.util.concurrent.CopyOnWriteArrayList
  */
 abstract class MobileAdListenerTransform<I : MobileAdListener, O> {
     private val listAdCallback = CopyOnWriteArrayList<I>()
-    fun addListener(listener: I) {
-        listAdCallback.add(listener)
+    fun addListener(vararg listener: I) {
+        listAdCallback.addAll(listener)
     }
 
     fun removeListener(listener: I) {
@@ -19,5 +19,9 @@ abstract class MobileAdListenerTransform<I : MobileAdListener, O> {
 
     fun invokeAdListener(action: (adListener: I) -> Unit) {
         listAdCallback.forEach(action)
+    }
+
+    open fun clearListener() {
+        listAdCallback.clear()
     }
 }

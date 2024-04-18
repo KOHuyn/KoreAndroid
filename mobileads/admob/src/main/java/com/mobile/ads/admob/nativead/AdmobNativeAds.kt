@@ -49,7 +49,8 @@ object AdmobNativeAds : MobileNativeAds<AdmobNativeRequest> {
                     it.onAdLoaded(
                         AdmobNativeResult(
                             nativeAd,
-                            listenerManager
+                            request.nativeLayoutId,
+                            listenerManager,
                         )
                     )
                 }
@@ -70,14 +71,14 @@ object AdmobNativeAds : MobileNativeAds<AdmobNativeRequest> {
             })
         }
 
-    override fun populateTo(view: ViewGroup, nativeLayoutId: Int, nativeResult: NativeResult) {
+    override fun populateAd(viewGroup: ViewGroup, nativeResult: NativeResult) {
         if (nativeResult is AdmobNativeResult) {
             val nativeAd = nativeResult.native
             val nativeAdView =
-                LayoutInflater.from(view.context).inflate(nativeLayoutId, null) as NativeAdView
+                LayoutInflater.from(viewGroup.context).inflate(nativeResult.layoutNativeId, null) as NativeAdView
             populateNativeAdView(nativeAd, nativeAdView)
-            view.removeAllViews()
-            view.addView(nativeAdView)
+            viewGroup.removeAllViews()
+            viewGroup.addView(nativeAdView)
         }
     }
 

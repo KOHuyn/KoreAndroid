@@ -88,12 +88,12 @@ object AdmobAppOpenAd : MobileAppOpenAds<AdmobAppOpenRequest> {
             result.listenerManager.addListener(object : MobileAppOpenAdListener() {
                 override fun onAdClose() {
                     super.onAdClose()
-                    dialog.dismiss()
+                    kotlin.runCatching { dialog.dismiss() }
                 }
 
                 override fun onAdFailToShow() {
                     super.onAdFailToShow()
-                    dialog.dismiss()
+                    kotlin.runCatching { dialog.dismiss() }
                 }
 
             })

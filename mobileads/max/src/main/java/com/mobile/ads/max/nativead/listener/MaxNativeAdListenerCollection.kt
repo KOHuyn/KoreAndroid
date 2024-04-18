@@ -9,14 +9,15 @@ import com.mobile.ads.core.nativead.result.NativeResult
 import com.mobile.ads.error.MobileAdError
 import com.mobile.ads.listener.MobileAdListenerTransform
 import com.mobile.ads.max.error.MaxAdError
+import com.mobile.ads.max.listener.MaxNativeMobileAdListenerTransform
 import com.mobile.ads.max.result.MaxNativeResult
 
 /**
  * Created by KO Huyn on 05/03/2024.
  */
 class MaxNativeAdListenerCollection :
-    MobileAdListenerTransform<MobileNativeAdListener, MaxNativeAdListener>() {
-    override fun invokeTransformListener(): MaxNativeAdListener {
+    MaxNativeMobileAdListenerTransform<MobileNativeAdListener>() {
+    override fun invokeListener(): MaxNativeAdListener {
         return object : MaxNativeAdListener() {
             override fun onNativeAdClicked(p0: MaxAd) {
                 super.onNativeAdClicked(p0)
@@ -25,7 +26,6 @@ class MaxNativeAdListenerCollection :
 
             override fun onNativeAdLoaded(adView: MaxNativeAdView?, ad: MaxAd) {
                 super.onNativeAdLoaded(adView, ad)
-                invokeAdListener { it.onAdLoaded(MaxNativeResult(adView, ad, this@MaxNativeAdListenerCollection)) }
             }
 
             override fun onNativeAdLoadFailed(p0: String, p1: MaxError) {
@@ -33,5 +33,6 @@ class MaxNativeAdListenerCollection :
                 invokeAdListener { it.onAdFailToLoad(MaxAdError(p1)) }
             }
         }
+
     }
 }
