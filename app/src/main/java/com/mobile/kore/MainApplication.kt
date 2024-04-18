@@ -18,7 +18,7 @@ class MainApplication : Application() {
         AdmobAppOpenAdResume.requestAdIfAvailable(
             AdmobAppOpenRequest(
                 this,
-                "ca-app-pub-3940256099942544/9257395921"
+                "ca-app-pub-5076265612881255/5770333204"
             )
         )
         MobileAdListenerGlobal.addOnAdClickListener {

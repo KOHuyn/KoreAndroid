@@ -38,6 +38,9 @@ android {
         viewBinding = true
         buildConfig = true
     }
+    aaptOptions {
+        additionalParameters.add("--warn-manifest-validation")
+    }
 }
 
 dependencies {

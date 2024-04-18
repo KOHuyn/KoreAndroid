@@ -6,6 +6,12 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <Button
+        android:id="@+id/btnReadFile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Go to read file"/>
+
     <ProgressBar
         style="@style/Widget.AppCompat.ProgressBar.Horizontal"
         android:layout_width="match_parent"
@@ -21,20 +27,22 @@
 
         <include
             android:id="@+id/shimmerBannerAd"
-            android:visibility="gone"
-            layout="@layout/shimmer_banner_view" />
+            layout="@layout/shimmer_banner_view"
+            android:layout_height="58dp" />
     </FrameLayout>
 
     <FrameLayout
         android:id="@+id/nativeFrame"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent" >
+        app:layout_constraintTop_toTopOf="parent">
+
         <include
             android:id="@+id/shimmerNative"
-            android:visibility="gone"
-            layout="@layout/shimmer_native_small_view" />
+            layout="@layout/shimmer_native_small_view"
+            android:visibility="gone" />
     </FrameLayout>
 
     <FrameLayout
@@ -42,12 +50,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent" >
+        app:layout_constraintTop_toTopOf="parent">
 
         <include
             android:id="@+id/shimmerNativeNoMedia"
-            android:visibility="gone"
-            layout="@layout/shimmer_native_small_view" />
+            layout="@layout/shimmer_native_small_view"
+            android:visibility="gone" />
     </FrameLayout>
 
 </LinearLayout>

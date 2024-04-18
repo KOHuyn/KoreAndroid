@@ -19,7 +19,9 @@ import com.mobile.ads.error.MobileAdError
 import com.mobile.ads.ext.safeResume
 import com.mobile.ads.listener.AdResult
 import com.mobile.ads.listener.AdResultListener
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.suspendCancellableCoroutine
+import kotlinx.coroutines.withContext
 
 /**
  * Created by KO Huyn on 05/03/2024.
@@ -55,16 +57,18 @@ object AdmobBannerAds : MobileBannerAds<AdmobBannerRequest> {
     }
 
     override suspend fun getAd(request: AdmobBannerRequest): AdResult<BannerResult> =
-        suspendCancellableCoroutine { cott ->
-            requestAd(request, object : AdResultListener<BannerResult> {
-                override fun onCompleteListener(result: BannerResult) {
-                    cott.safeResume(AdResult.Success(result))
-                }
+        withContext(Dispatchers.Main) {
+            suspendCancellableCoroutine { cott ->
+                requestAd(request, object : AdResultListener<BannerResult> {
+                    override fun onCompleteListener(result: BannerResult) {
+                        cott.safeResume(AdResult.Success(result))
+                    }
 
-                override fun onFailureListener(error: MobileAdError) {
-                    cott.safeResume(AdResult.Failure(error))
-                }
-            })
+                    override fun onFailureListener(error: MobileAdError) {
+                        cott.safeResume(AdResult.Failure(error))
+                    }
+                })
+            }
         }
 
     override fun populateAd(viewGroup: ViewGroup, result: BannerResult) {
