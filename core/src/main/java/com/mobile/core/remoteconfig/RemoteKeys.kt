@@ -36,14 +36,14 @@ abstract class RemoteKeys(open val remoteKey: String) {
         }
     }
 
-    class StringEnumKey<T : RemoteEnumString>(
+    open class StringEnumKey<T : RemoteEnumString>(
         remoteKey: String, defaultValue: T
     ) : RemoteKeys(remoteKey) {
         var defaultValue: T = defaultValue
             private set
     }
 
-    class DoubleKey : RemoteKeys {
+    open class DoubleKey : RemoteKeys {
         var defaultValue: Double
             private set
 
@@ -60,7 +60,7 @@ abstract class RemoteKeys(open val remoteKey: String) {
     }
 
 
-    class LongKey : RemoteKeys {
+    open class LongKey : RemoteKeys {
         var defaultValue: Long
             private set
 
@@ -76,7 +76,7 @@ abstract class RemoteKeys(open val remoteKey: String) {
         }
     }
 
-    class ListIntegerKey(
+    open class ListIntegerKey(
         override val remoteKey: String,
         val defaultValue: List<Int>
     ) : RemoteKeys(remoteKey)

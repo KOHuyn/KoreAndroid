@@ -29,7 +29,7 @@ abstract class BaseRemoteConfiguration {
 
     fun FirebaseRemoteConfig.saveToLocal(keyType: RemoteKeys) {
         val hasRemoteKey = kotlin.runCatching {
-            getString(keyType.remoteKey).isEmpty()
+            getString(keyType.remoteKey).isNotEmpty()
         }.getOrDefault(true)
         if (!hasRemoteKey) return
         val remoteConfig = this
